@@ -1,5 +1,5 @@
 # **Bienvenidos**
-(![Banner-3.jpg](medias%2FBanner-3.jpg))
+(![Banner-3.jpg](./Foro/medias%2FBanner-3.jpg))
 
 ## 🚀 Presentacion 🚀
 
