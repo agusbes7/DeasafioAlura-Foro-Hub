@@ -1,4 +1,4 @@
-package com.personal.Foro.model.ClasesPrimarias;
+package com.personal.Foro.model.Clases;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

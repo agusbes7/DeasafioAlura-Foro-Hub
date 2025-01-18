@@ -1,4 +1,4 @@
-package com.personal.Foro.model.ClasesPrimarias;
+package com.personal.Foro.model.Clases;
 
 import com.personal.Foro.model.Dto.DatosRegistrarTopico;
 import com.personal.Foro.model.Enums.Estado;
@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
