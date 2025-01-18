@@ -28,7 +28,7 @@ public class Topico {
     private Estado estadoTopico;
     private String curso;
  private Long idUsuario;
-
+private  List<String> url=new ArrayList<>();
 //    @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, orphanRemoval = true)
   //  private List<Respuesta> respuestas = new ArrayList<>();
 //----------------------------------------------------------
@@ -42,6 +42,8 @@ this.curso=datos.curso();
 DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 this.fechaDeCreacion = LocalDate.now().format(formateador);
 //this.usuario=datos.usuario()
-this.idUsuario;
+this.idUsuario=datos.id();
+this.url=datos.archivos();
 }
+
 }

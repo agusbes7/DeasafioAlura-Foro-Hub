@@ -22,12 +22,10 @@ public class Curso {
 private    Long id;
 
 private String nombre;
-private List<Tematica> temas=new ArrayList<>(3);
-
-
-public Curso(String nombre,List<Tematica> tematica){
-        this.nombre=nombre;
-this.temas=tematica;}
-
+private  String temas;
+public Curso(String nombre,List<Tematica> tematica) {
+        this.nombre = nombre;
+        this.temas = Tematica.listaAString(tematica);
+}
 }
 
