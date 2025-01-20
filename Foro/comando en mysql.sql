@@ -8,4 +8,6 @@ SELECT * FROM usuarios;
 SELECT * FROM topicos;
 SELECT * FROM respuestas;
 SELECT * FROM cursos;   
+SHOW INDEXES FROM topicos;
 Describe topicos;
+

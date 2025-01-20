@@ -11,6 +11,9 @@ import com.personal.Foro.model.Repository.UsuarioRepository;
 import com.personal.Foro.service.ValidacionTopico;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,33 +23,48 @@ import java.net.URI;
 @RestController
 @RequestMapping("/topicos")
 public class TopicoController {
-@Autowired
+    @Autowired
     TopicoRepository repositorio;
-@Autowired
+    @Autowired
     UsuarioRepository usuario;
-@Autowired
+    @Autowired
     ValidacionTopico topico;
-@Autowired
+    @Autowired
     CursoRepository taller;
-@PostMapping
-    public ResponseEntity<DatosRespuestaTopico> RegistrarTopico(@RequestBody @Valid DatosRegistrarTopico datos){
-topico.validarIdYNombreUsuario(datos.id(), datos.usuario());
-Usuario aux=usuario.findByUsuario(datos.usuario());
-topico.validarCurso(datos.curso());
-    Curso  curso=taller.findByNombre(datos.curso()).get();
-Topico nuevo= new Topico(datos,aux,curso);
 
-repositorio.save(nuevo);
-    DatosRespuestaTopico enviar=new DatosRespuestaTopico(
-            nuevo.getId(),
-            nuevo.getTitulo(),
-            nuevo.getMensaje(),
-            nuevo.getFechaDeCreacion(),
-"Tema: "+            nuevo.getCurso().getNombre()+" "+nuevo.getCurso().getTemas(),
-  "Autor: "+      nuevo.getAutor().getUsuario()+ " id: "+nuevo.getAutor().getId(),
-           nuevo.getRespuestas());
+    @PostMapping
+    public ResponseEntity<DatosRespuestaTopico> RegistrarTopico(@RequestBody @Valid DatosRegistrarTopico datos) {
+        topico.validarIdYNombreUsuario(datos.id(), datos.usuario());
+        Usuario aux = usuario.findByUsuario(datos.usuario());
+        Curso tema = topico.validarCurso(datos.curso());
+        topico.validarUnicidad(datos.titulo(), datos.mensaje());
+        Topico nuevo = new Topico(datos, aux, tema);
 
-    return ResponseEntity.ok(enviar);
-}
+        repositorio.save(nuevo);
+        DatosRespuestaTopico enviar = new DatosRespuestaTopico(
+                nuevo.getId(),
+                nuevo.getTitulo(),
+                nuevo.getMensaje(),
+                nuevo.getFechaDeCreacion(),
+                "Tema: " + nuevo.getCurso().getNombre() + " " + nuevo.getCurso().getTemas(),
+                "Autor: " + nuevo.getAutor().getUsuario() + " id: " + nuevo.getAutor().getId(),
+                nuevo.getRespuestas());
 
-}
+        return ResponseEntity.ok(enviar);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DatosRespuestaTopico>> listarTopicos(@PageableDefault(size = 5)Pageable paginacion) {
+        Page<DatosRespuestaTopico> page = repositorio.findAll(paginacion)
+                .map(nuevo -> new DatosRespuestaTopico(
+                        nuevo.getId(),
+                        nuevo.getTitulo(),
+                        nuevo.getMensaje(),
+                        nuevo.getFechaDeCreacion(),
+                        "Tema: " + nuevo.getCurso().getNombre() + " " + nuevo.getCurso().getTemas(),
+                        "Autor: " + nuevo.getAutor().getUsuario() + " id: " + nuevo.getAutor().getId(),
+                        nuevo.getRespuestas()));
+
+        return ResponseEntity.ok(page); }
+    }
+

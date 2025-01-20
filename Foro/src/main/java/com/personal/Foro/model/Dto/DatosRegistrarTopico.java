@@ -13,7 +13,7 @@ public record DatosRegistrarTopico(
 @JsonAlias("Nombre de usuario") String usuario,
 @NotBlank(message = "Este campo no puede estar en blanco")
         String titulo,
-
+@NotBlank(message = "El mensaje no puede estar en blanco, permite describir tu pregunta")
         String mensaje,
 @NotBlank(message = "Este campo No puede estar en blanco, debemos asociar tu topico a un curso")
 String curso

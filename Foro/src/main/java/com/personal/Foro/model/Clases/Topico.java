@@ -15,7 +15,6 @@ import java.util.List;
 @Table(name = "topicos")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Topico {
     @Id
@@ -40,6 +39,7 @@ public class Topico {
     @OneToMany(mappedBy = "topico", fetch = FetchType.LAZY)
     private List<Respuesta> respuestas = new ArrayList<>();
 //----------------------------------------------------------
+    public  Topico(){}
 public  Topico(DatosRegistrarTopico datos, Usuario autor,Curso vinculo){
 this.titulo=datos.titulo();
 this.mensaje=datos.mensaje();
