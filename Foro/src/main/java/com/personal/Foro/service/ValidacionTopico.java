@@ -36,6 +36,13 @@ public class ValidacionTopico {
         return cursoRepository.findByNombre(nombre)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Curso no encontrado"));
     }
+    public Long validarId(String id) {
+        try {
+            return Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El formato del ID es incorrecto. Se esperaba un número.");
+        }
+    }
 
     public void validarUnicidad(String titulo, String mensaje) {
         Optional<Topico> aux = topicoRepository.findByTituloAndMensaje(titulo, mensaje);

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record DatosRespuestaTopico(
-Long id,
+
 String titulo,
 String mensaje,
 String fechaDeCreacion,
