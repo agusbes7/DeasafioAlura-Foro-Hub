@@ -14,9 +14,6 @@ import java.util.List;
 
 @Entity(name = "Usuario")
 @Table(name ="usuarios" )
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Usuario {
@@ -27,9 +24,10 @@ public class Usuario {
     private String usuario;
     private  String correo;
     private  String clave;
+    @Enumerated(EnumType.STRING)
     private Roles rol;
 
-
+public Usuario(){}
 
     public Usuario(DatosUsuarios datos){
         this.correo=datos.correo();
@@ -37,7 +35,56 @@ public class Usuario {
         this.clave= datos.clave();
 this.rol=Roles.CLIENTE;}
 
-//    @Override
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public Roles getRol() {
+        return rol;
+    }
+
+    public void setRol(Roles rol) {
+        this.rol = rol;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", usuario='" + usuario + '\'' +
+                ", correo='" + correo + '\'' +
+                ", rol=" + rol +
+                '}';
+    }
+    //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 //    }

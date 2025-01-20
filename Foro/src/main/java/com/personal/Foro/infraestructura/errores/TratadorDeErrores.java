@@ -17,16 +17,16 @@ public class TratadorDeErrores {
         return ResponseEntity.notFound().build();
     }
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity tratarError400(MethodArgumentNotValidException e){
-//        var errores = e.getFieldErrors().stream().map(DatosErrorValidacion::new).toList();
-//        return ResponseEntity.badRequest().body(errores);
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity tratarError400(MethodArgumentNotValidException e){
+        var errores = e.getFieldErrors().stream().map(DatosErrorValidacion::new).toList();
+        return ResponseEntity.badRequest().body(errores);
+    }
 
-//    private record DatosErrorValidacion(String campo, String error){
-//        public DatosErrorValidacion(FieldError error) {
-//            this(error.getField(), error.getDefaultMessage());
-//        }
-//    }
+    private record DatosErrorValidacion(String campo, String error){
+        public DatosErrorValidacion(FieldError error) {
+            this(error.getField(), error.getDefaultMessage());
+        }
+    }
 
 }

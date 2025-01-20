@@ -7,14 +7,16 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record DatosRegistrarTopico(
-        @NotNull
+        @NotNull(message = "El id no puede ser nulo")
         @JsonAlias("Identificador de usuario") Long id,
-@NotBlank
+@NotBlank(message = "Necesitas tener un usuario en el sistema para poder registrar topicos")
 @JsonAlias("Nombre de usuario") String usuario,
-@NotBlank
+@NotBlank(message = "Este campo no puede estar en blanco")
         String titulo,
-@NotBlank
+
         String mensaje,
-@NotBlank
-String curso,
-List<String> archivos){}
+@NotBlank(message = "Este campo No puede estar en blanco, debemos asociar tu topico a un curso")
+String curso
+){
+
+}

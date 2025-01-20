@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,19 +18,65 @@ public class Respuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    private  String mensaje;
-//    @ManyToOne
-//    @JoinColumn(name = "idTopico", nullable = false)
-//    private  Usuario autor;
-// @ManyToOne
-//   @JoinColumn(name = "idTopico", nullable = false)
-//    private Topico topico; // Relación con el tópico al que pertenece la respuesta
-//
-//  @ManyToOne
-//    @JoinColumn(name = "idRespuestaPadre", nullable = true)
-//    private Respuesta respuestaPadre;
+   private  String mensaje;
+   private String hora=LocalDateTime.now().toString();
+@ManyToOne
+@JoinColumn(name = "autor_id")
+   private Usuario autor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topico_id")
+    private Topico topico;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public Usuario getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Usuario autor) {
+        this.autor = autor;
+    }
+
+    public Topico getTopico() {
+        return topico;
+    }
+
+    public void setTopico(Topico topico) {
+        this.topico = topico;
+    }
+
+    @Override
+    public String toString() {
+        return "Respuesta{" +
+                "id=" + id +
+                ", mensaje='" + mensaje + '\'' +
+                ", hora='" + hora + '\'' +
+                ", autor=" + autor +
+                ", topico=" + topico +
+                '}';
+    }
 }
 
 
